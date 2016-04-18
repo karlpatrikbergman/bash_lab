@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+app=`basename "$0"`
+
+echo "$app: Hello from me!"
