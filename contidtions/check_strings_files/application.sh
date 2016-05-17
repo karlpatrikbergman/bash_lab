@@ -4,8 +4,8 @@
 . ././../../basic_functions/file_util.sh
 
 # Fine debug tool
-# export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
-# set -x
+export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+set -x
 
 app=`basename "$0"`
 printf "\n"
