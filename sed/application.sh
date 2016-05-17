@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
+. ././../basic_functions/file_util.sh
 
-function run_sed_example1() {
-    sed -i '/comment me out/s/^/#/g' file.txt
-}
+#comment_out_line "file.txt" "comment me out"
+#un_comment_out_line "file.txt" "comment me out"
 
-#run_sed_example1
+#comment_out_line "snmp.conf" "mibs :"
+#un_comment_out_line "snmp.conf" "mibs :"
 
-function run_sed_example2() {
-    sed -i '/mibs :/s/^/#/g' snmp.conf
-}
-
-run_sed_example2
+comment_out_line "snmpd.conf" "agentAddress  udp:127.0.0.1:161"
+un_comment_out_line "snmpd.conf" "agentAddress udp:161,udp6:\[::1\]:161"
