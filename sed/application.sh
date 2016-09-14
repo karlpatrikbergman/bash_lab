@@ -9,3 +9,10 @@
 
 comment_out_line "snmpd.conf" "agentAddress  udp:127.0.0.1:161"
 un_comment_out_line "snmpd.conf" "agentAddress udp:161,udp6:\[::1\]:161"
+
+
+sed -i "/agentAddress  udp:127.0.0.1:161/s/^/#/g" snmpd.conf
+comment_out_line "snmpd.conf" "agentAddress  udp:127.0.0.1:161"
+
+sed -i "/agentAddress udp:161,udp6:\[::1\]:161/ s/^#//" snmpd.conf
+un_comment_out_line "snmpd.conf" "agentAddress udp:161,udp6:\[::1\]:161"
