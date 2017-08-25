@@ -37,8 +37,33 @@ readonly MY_STRING="hej alla glada"
 #scramble_string <<< "${MY_STRING}"
 #to_uppercase <<< "${MY_STRING}"
 
-# This equals
-to_uppercase <<< $(scramble_string <<< $(reverse_string <<< "${MY_STRING}"))
-# this
-echo "${MY_STRING}" | reverse_string | scramble_string | to_uppercase
+# This...
+#to_uppercase <<< $(scramble_string <<< $(reverse_string <<< "${MY_STRING}"))
+# equals this.
+#echo "${MY_STRING}" | reverse_string | scramble_string | to_uppercase
 
+### ALTERNATIVE ###
+
+return_string2() {
+    echo "foo bar"
+}
+
+to_uppercase2() {
+    echo "${1}" | tr '[:lower:]' '[:upper:]'
+}
+
+reverse_string2() {
+    echo "${1}" | rev
+}
+
+scramble_string2() {
+    echo "${1}" | sed 's/./&\n/g' | shuf | tr -d "\n"
+}
+
+#to_uppercase2 "${MY_STRING}"
+#reverse_string2 "${MY_STRING}"
+#scramble_string2 "${MY_STRING}"
+
+to_uppercase2 "$(scramble_string2 "$(reverse_string2 "${MY_STRING}")")"
+
+exit 0
