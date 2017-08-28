@@ -32,15 +32,24 @@ scramble_string() {
     sed 's/./&\n/g' | shuf | tr -d "\n"
 }
 
+# https://stackoverflow.com/questions/18761209/how-to-make-a-bash-function-which-can-read-from-standard-input
+add_bar_at_end_of_str() {
+    local INPUT;
+    read -d '' -u 0 INPUT;
+#    printf "$@" "$INPUT";
+    echo "${INPUT}bar"
+}
+
 readonly MY_STRING="hej alla glada"
 #reverse_string <<< "${MY_STRING}"
 #scramble_string <<< "${MY_STRING}"
 #to_uppercase <<< "${MY_STRING}"
 
 # This...
-#to_uppercase <<< $(scramble_string <<< $(reverse_string <<< "${MY_STRING}"))
+#add_bar_at_end_of_str <<< $(to_uppercase <<< $(scramble_string <<< $(reverse_string <<< "${MY_STRING}")))
 # equals this.
-#echo "${MY_STRING}" | reverse_string | scramble_string | to_uppercase
+#echo "${MY_STRING}" | reverse_string | scramble_string | to_uppercase | add_bar_at_end_of_str
+
 
 ### ALTERNATIVE ###
 
@@ -64,6 +73,6 @@ scramble_string2() {
 #reverse_string2 "${MY_STRING}"
 #scramble_string2 "${MY_STRING}"
 
-to_uppercase2 "$(scramble_string2 "$(reverse_string2 "${MY_STRING}")")"
+#to_uppercase2 "$(scramble_string2 "$(reverse_string2 "${MY_STRING}")")"
 
 exit 0
