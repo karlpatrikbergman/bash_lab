@@ -33,17 +33,24 @@ scramble_string() {
 }
 
 # https://stackoverflow.com/questions/18761209/how-to-make-a-bash-function-which-can-read-from-standard-input
+# http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_08_02.html
+
+#   -d DELIM	The first character of DELIM is used to terminate the input line, rather than newline.
+#   -u FD	    Read input from file descriptor FD.
+#   @           Expands to the positional parameters, starting from one. When the expansion occurs within double quotes,
+#               each parameter expands to a separate word. That is, "$@" is equivalent to "$1" "$2" ...
+
 add_bar_at_end_of_str() {
-    local INPUT;
+    local readonly INPUT;
     read -d '' -u 0 INPUT;
-#    printf "$@" "$INPUT";
-    echo "${INPUT}bar"
+    printf "$@" "${INPUT}bar";
 }
 
 readonly MY_STRING="hej alla glada"
 #reverse_string <<< "${MY_STRING}"
 #scramble_string <<< "${MY_STRING}"
 #to_uppercase <<< "${MY_STRING}"
+#add_bar_at_end_of_str <<< "foo"
 
 # This...
 #add_bar_at_end_of_str <<< $(to_uppercase <<< $(scramble_string <<< $(reverse_string <<< "${MY_STRING}")))
